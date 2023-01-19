@@ -124,5 +124,5 @@ todoUl.addEventListener("click",(e)=>{
    else{
     alert("other element clicked");
    }
-
+console.log(todoList);
 })
