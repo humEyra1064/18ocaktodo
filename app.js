@@ -19,6 +19,10 @@ window.addEventListener("load", () => {
 });
 //localstorageden gelen verileri alıp ekrana basmak için böyle bir fonksiyon tanımladık.👆
 const getTodoListFromLocalStorage = () => {
+    // console.log(todoList);
+    todoList.forEach((todo)=>{
+createTodo(todo);
+    });
     
 }
 //local storageden aldığım verileri arayüze yükleyecek.👆
@@ -91,3 +95,34 @@ console.log(li);
 //append li to ul li yi de ul ye append ettik.
 todoUl.append(li);
 }
+
+//Capturing vs Bubbling
+//parenta eventlistener tanımlayarak içindeki bütün child lara yükledik.
+todoUl.addEventListener("click",(e)=>{
+  const idAttr = e.target.closest("li").getAttribute("id");
+   if(e.target.classList.contains("fa-check")){
+    // alert("check clicked");
+    e.target.parentElement.classList.toggle("checked");
+    todoList.forEach((todo)=>{
+        if(todo.id == idAttr){
+            todo.completed = !todo.completed;
+
+        }
+        localStorage.setItem("todoList", JSON.stringify(todoList));
+    });
+    //check tıklandığında class değişti ve yapılacak css değişiklikleri aktif oldu.
+   }
+  else if(e.target.classList.contains("fa-trash")){
+    // alert("remove clicked");
+    //UI den siliyoruz
+    e.target.parentElement.remove();
+    //silineni  diziden de silecek.id si ile silinmeyenleri filtrele array i güncelle
+    todoList = todoList.filter((todo)=>todo.id !=idAttr);
+    localStorage.setItem("todoList", JSON.stringify(todoList));
+    //güncel olan arrayi local storage e attık👆
+   }
+   else{
+    alert("other element clicked");
+   }
+
+})
