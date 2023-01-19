@@ -60,25 +60,25 @@ e.target.closest("form").reset();//formun içindeki tüm inputları resetliyor.e
 const createTodo = (newTodo) =>{
 //todo item creation newtodo objesi fonksiyonun içine geliyor.Burdaki verileri destr.edceğiz ve ilgili html ve buton vasıtasi ile arkadaki localstorage bascağız.
 //alert("item was added");newTodo objemi oluşturdum createTodo fonksiyonuma verdim destr.ettim istediğim htmel formatında basacağım uı.
-//obj. dest. (ES6 => JS'e kazandırılan yapılar??)
+//obj. dest. js es6 ile girdi. (ES6 => JS'e kazandırılan yapılar??)
 const { id, completed, text } = newTodo;
 
-//create li
+//create li li elementine id yi li ye atıyoruz setatribu. ile
 const li = document.createElement("li");
 li.setAttribute("id", id);
 
 //add class with completed(status)
-completed ? li.classList.add("checked") : "";
+completed ? li.classList.add("checked") : ""; //tamamlanmış bir todo ise checked classını atarım.tamamlanmadı ise li nin başka classı yok.
 
-//create check icon
+//create check icon li nin başına check iconu koyuyorum.
 const icon = document.createElement("i");
-icon.setAttribute("class", "fas fa-check");
+icon.setAttribute("class", "fas fa-check"); //key value yapısı fas fa-check classı verdik.
 //append vs. appendChild
-li.append(icon);
+li.append(icon); //iconu li ye append  ediyoruz.
 
 //create item text
 const p = document.createElement("p");
-p.innerText = text;
+p.innerText = text; //fonksiyona parametre olarak verdiği input verisini aldık p nin innerText ine atadık.
 li.appendChild(p);
 
 //create remove icon
@@ -88,6 +88,6 @@ li.append(removeIcon);
 
 console.log(li);
 
-//append li to ul
+//append li to ul li yi de ul ye append ettik.
 todoUl.append(li);
 }
